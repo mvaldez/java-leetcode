@@ -1,5 +1,7 @@
 package com.sandbox.leetcode;
 
+import com.sandbox.collections.TreeNode;
+
 import java.util.*;
 
 public class Solutions {
@@ -17,7 +19,7 @@ public class Solutions {
     public static int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> m = new HashMap<>();
         int[] ret = {-1, -1};
-        for (int i=0; i<nums.length; i++) {
+        for (int i = 0; i < nums.length; i++) {
             int tmp = target - nums[i];
             if (m.containsKey(tmp)) {
                 ret[0] = i;
@@ -37,13 +39,13 @@ public class Solutions {
 
         StringBuilder solution = new StringBuilder();
         List<StringBuilder> l = new ArrayList<>();
-        for (int i=0; i<numRows; i++) {
+        for (int i = 0; i < numRows; i++) {
             l.add(new StringBuilder());
         }
 
         int index = 0;
         boolean forward = true;
-        for (int i=0; i<s.length(); i++) { // iterate string
+        for (int i = 0; i < s.length(); i++) { // iterate string
             l.get(index).append(s.charAt(i));
 
             // select next array
@@ -55,13 +57,13 @@ public class Solutions {
 
             if (index == 0) {
                 forward = true;
-            } else if (index == numRows-1) {
+            } else if (index == numRows - 1) {
                 forward = false;
             }
         }
 
         // merge strings
-        for (int i=0; i<numRows; i++) {
+        for (int i = 0; i < numRows; i++) {
             solution.append(l.get(i));
         }
 
@@ -81,7 +83,7 @@ public class Solutions {
             sb.append("-");
         }
 
-        for (int i=tmp.length-1 ; i>index; i--) {
+        for (int i = tmp.length - 1; i > index; i--) {
             sb.append(tmp[i]);
         }
         Integer result = 0;
@@ -112,7 +114,7 @@ public class Solutions {
         int max = 0;
         int lastIndex = 0;
         Set<Character> charSet = new HashSet<>();
-        for (int i=0; i<cArray.length; i++) {
+        for (int i = 0; i < cArray.length; i++) {
             if (charSet.contains(cArray[i])) {
                 if (len >= max) {
                     max = len;
@@ -143,17 +145,17 @@ public class Solutions {
         if (s.length() == 1) return s;
 
         // test if the chars are all the same
-        if (s.substring(0, (s.length()/2)).equals(s.substring((s.length()/2)))) {
+        if (s.substring(0, (s.length() / 2)).equals(s.substring((s.length() / 2)))) {
             return s;
         }
 
         int max = 0;
         String result = s.substring(0, 1);
 
-        for (int i=0; i<s.length(); i++) {
-            for (int j=i; j<s.length(); j++) {
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i; j < s.length(); j++) {
                 if (i != j && s.charAt(i) == s.charAt(j)) {
-                    String p = s.substring(i, j+1);
+                    String p = s.substring(i, j + 1);
                     if (isPali(p) && p.length() > max) {
                         max = p.length();
                         result = p;
@@ -166,9 +168,9 @@ public class Solutions {
 
     public static boolean isPali(String s) {
         int i = 0;
-        int j = s.length() -1;
+        int j = s.length() - 1;
 
-        while (i<=j) {
+        while (i <= j) {
             if (s.charAt(i) != s.charAt(j)) {
                 return false;
             }
@@ -181,11 +183,11 @@ public class Solutions {
     /**
      * The Hamming distance between two integers is the number of positions
      * at which the corresponding bits are different.
-     *
+     * <p>
      * if you XOR 2 integers and count the set bits (1's) you get the hamming distance
      * for those 2 integers.  IOW, you get the number of changes required to make them
      * the same.
-     *
+     * <p>
      * The hamming distance between 1 and 4 is
      * 0001
      * 0100
@@ -204,11 +206,11 @@ public class Solutions {
     /**
      * Given a lower and upper number bound, output a list of every possible
      * self dividing number, including the bounds if possible
-     *
+     * <p>
      * Integer division by 10 removes the last digit in a number.  Mod'ing a
      * number by 10 gives you the last digit.
      *
-     * @param left starting number in range
+     * @param left  starting number in range
      * @param right ending number in range; inclusive
      * @return self divisible numbers in range
      */
@@ -219,8 +221,8 @@ public class Solutions {
             for (int j = i; j > 0; j = j / 10) {
                 int lastDigit = j % 10;
                 if (lastDigit == 0 || i % lastDigit != 0) {
-                   valid = false;
-                   break;
+                    valid = false;
+                    break;
                 }
             }
             if (valid) {
@@ -228,5 +230,54 @@ public class Solutions {
             }
         }
         return results;
+    }
+
+    /**
+     * I was not able to solve this one.  This is the solution provided by leetcode.
+     *
+     * My initial solution failed for the case where one tree had more levels.
+     *
+     * @param t1 tree node
+     * @param t2 tree node
+     * @return t1 node merged into t2 by summing the values
+     */
+    public static TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+        if (t1 == null) {
+            return t2;
+        }
+        if (t2 == null) {
+            return t1;
+        }
+        t1.val += t2.val;
+        t1.left = mergeTrees(t1.left, t2.left);
+        t1.right = mergeTrees(t1.right, t2.right);
+        return t1;
+    }
+
+    /**
+     * Treat the moves like coordinates in a 2D plane.  You know that
+     * if the point is back to the beginning if (x, y) = (0,0)
+     *
+     * @param moves String of characters representing moves (U,D,L,R)
+     * @return true if back to original position (0, 0)
+     */
+    public static boolean judgeCircle(String moves) {
+        // (0,0) (x, y) (l/r, u/d) (-/+, +/-)
+        int x = 0;
+        int y = 0;
+        for (char c : moves.toCharArray()) {
+           if (c == 'U' || c == 'u') {
+               y += 1;
+           } else if (c == 'D' || c == 'd') {
+               y += -1;
+           } else if (c == 'L' || c == 'l') {
+               x += 1;
+           } else if (c == 'R' || c == 'r') {
+               x += -1;
+           } else {
+               throw new RuntimeException("Invalid input");
+           }
+        }
+        return x == 0 && y == 0;
     }
 }

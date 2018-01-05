@@ -1,5 +1,6 @@
 package com.sandbox.leetcode;
 
+import com.sandbox.collections.TreeNode;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -106,5 +107,46 @@ public class SolutionsTest {
     public void selfDivNumTest() {
         MatcherAssert.assertThat(Solutions.selfDividingNumbers(1, 22),
             CoreMatchers.equalTo(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22)));
+    }
+
+    @Test
+    public void mergeTreeNodesTest() {
+
+/*
+Input:
+        Tree 1                     Tree 2
+          1                         2
+         / \                       / \
+        3   2                     1   3
+       /                           \   \
+      5                             4   7
+*/
+        TreeNode n1 = new TreeNode(1);
+        n1.left = new TreeNode(3);
+        n1.right = new TreeNode(2);
+        n1.left.left = new TreeNode(5);
+
+        TreeNode n2 = new TreeNode(2);
+        n2.left = new TreeNode(1);
+        n2.right = new TreeNode(3);
+        n2.left.right = new TreeNode(4);
+        n2.right.right= new TreeNode(7);
+
+        System.out.println("---- n1 ----");
+        TreeNode.preOrderTraversal(n1);
+
+        System.out.println("---- n1 ----");
+        TreeNode.preOrderTraversal(n2);
+
+        TreeNode t = Solutions.mergeTrees(n1, n2);
+
+        System.out.println("---- solution ----");
+        TreeNode.preOrderTraversal(t);
+    }
+
+    @Test
+    public void judgeCircleTest() {
+        String moves = "UUDDLLRRUDLRDURL";
+        assertTrue(Solutions.judgeCircle(moves));
     }
 }
