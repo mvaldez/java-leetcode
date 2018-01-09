@@ -1,15 +1,14 @@
 package com.sandbox.leetcode;
 
 import com.sandbox.collections.TreeNode;
-import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 import java.util.Arrays;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -106,7 +105,7 @@ public class SolutionsTest {
     @Test
     public void selfDivNumTest() {
         MatcherAssert.assertThat(Solutions.selfDividingNumbers(1, 22),
-            CoreMatchers.equalTo(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22)));
+            equalTo(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22)));
     }
 
     @Test
@@ -148,5 +147,16 @@ Input:
     public void judgeCircleTest() {
         String moves = "UUDDLLRRUDLRDURL";
         assertTrue(Solutions.judgeCircle(moves));
+    }
+
+    @Test
+    public void arrayPairSumTest() {
+        int[] a = new int[4];
+        a[0] = 1;
+        a[1] = 4;
+        a[2] = 3;
+        a[3] = 2;
+
+        assertThat(Solutions.arrayPairSum(a), equalTo(4));
     }
 }

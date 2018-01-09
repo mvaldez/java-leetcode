@@ -280,4 +280,24 @@ public class Solutions {
         }
         return x == 0 && y == 0;
     }
+
+    /**
+     * Given an array of 2n integers, your task is to group these integers into n pairs of integer,
+     * say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n
+     * as large as possible.
+     *
+     * If you sort the array you know that the every other index is the min of the pair and you
+     * are guaranteed to have n pairs since it is an array of 2n integers.
+     *
+     * @param nums int array
+     * @return sum of all min values in the pair
+     */
+    public static int arrayPairSum(int[] nums) {
+        Arrays.sort(nums);
+        int sum = 0;
+        for (int i = 0; i < nums.length; i = i + 2) {
+            sum += nums[i];
+        }
+        return sum;
+    }
 }
