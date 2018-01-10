@@ -300,4 +300,34 @@ public class Solutions {
         }
         return sum;
     }
+
+    /**
+     * Given two lists Aand B, and B is an anagram of A. B is an anagram of A means B is made by
+     * randomizing the order of the elements in A.
+     *
+     * We want to find an index mapping P, from A to B. A mapping P[i] = j means the ith element
+     * in A appears in B at index j.
+     *
+     * These lists A and B may contain duplicates. If there are multiple answers, output any of them.
+     *
+     *  A, B have equal lengths in range [1, 100].
+     *  A[i], B[i] are integers in range [0, 10^5].
+     *
+     * @param A array of ints
+     * @param B array of ints; anagram of A
+     * @return array with index mappings from A to B
+     */
+    public static int[] anagramMappings(int[] A, int[] B) {
+        Map<Integer, Integer> m = new HashMap<>();
+        int[] result = new int[A.length];
+
+        for (int i = 0; i < B.length; i++) {
+            m.put(B[i], i);
+        }
+
+        for (int i = 0; i < A.length; i++) {
+            result[i] = m.get(A[i]);
+        }
+        return result;
+    }
 }

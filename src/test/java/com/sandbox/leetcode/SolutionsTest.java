@@ -159,4 +159,14 @@ Input:
 
         assertThat(Solutions.arrayPairSum(a), equalTo(4));
     }
+
+    @Test
+    public void anagramMappingsTest() {
+        int[] A = new int[]{12, 28, 46, 32, 50};
+        int[] B = new int[]{50, 12, 32, 46, 28};
+
+        int[] result = new int[]{1, 4, 3, 2, 0};
+
+        assertThat(Solutions.anagramMappings(A, B), equalTo(result));
+    }
 }
