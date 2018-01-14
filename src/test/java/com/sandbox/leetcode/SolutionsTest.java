@@ -169,4 +169,11 @@ Input:
 
         assertThat(Solutions.anagramMappings(A, B), equalTo(result));
     }
+
+    @Test
+    public void findComplementTest() {
+        System.out.println(Integer.toBinaryString(Solutions.findComplement(5)));
+        assertThat(Solutions.findComplement(5), equalTo(2));
+        assertThat(Solutions.findComplement(1), equalTo(0));
+    }
 }
