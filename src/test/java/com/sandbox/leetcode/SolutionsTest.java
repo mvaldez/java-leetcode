@@ -176,4 +176,9 @@ Input:
         assertThat(Solutions.findComplement(5), equalTo(2));
         assertThat(Solutions.findComplement(1), equalTo(0));
     }
+
+    @Test
+    public void reverseStringTest() {
+        assertThat(Solutions.reverseString("hello"), equalTo("olleh"));
+    }
 }

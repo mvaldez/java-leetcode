@@ -350,4 +350,21 @@ public class Solutions {
         }
         return Integer.parseInt(sb.toString(), 2);
     }
+
+    /**
+     * Write a function that takes a string as input and returns the string reversed.
+     *
+     * @param s String
+     * @return String reversed
+     */
+    public static String reverseString(String s) {
+        char[] chars = s.toCharArray();
+        char[] reversed = new char[s.length()];
+        int index = 0;
+        for (int i = chars.length - 1; i >= 0 ; i--) {
+            reversed[index] = chars[i];
+            index++;
+        }
+        return String.valueOf(reversed);
+    }
 }
