@@ -367,4 +367,13 @@ public class Solutions {
         }
         return String.valueOf(reversed);
     }
+
+    public static String reverseWords(String s) {
+        StringBuilder sb = new StringBuilder();
+        for (String word : s.split(" ")) {
+            sb.append(" ");
+            sb.append(reverseString(word));
+        }
+        return sb.toString().trim();
+    }
 }

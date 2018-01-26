@@ -181,4 +181,10 @@ Input:
     public void reverseStringTest() {
         assertThat(Solutions.reverseString("hello"), equalTo("olleh"));
     }
+
+    @Test
+    public void reverseWordTest() {
+        assertThat(Solutions.reverseWords("Let's take LeetCode contest"), equalTo("s'teL ekat edoCteeL tsetnoc"));
+    }
+
 }
