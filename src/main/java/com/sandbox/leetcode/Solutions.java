@@ -376,4 +376,21 @@ public class Solutions {
         }
         return sb.toString().trim();
     }
+
+    public static boolean isToeplitzMatrix(int[][] matrix) {
+        for (int x = 1; x < matrix.length; x++) {
+            for(int y = 1; y < matrix[0].length; y++) {
+                // get the previous diagonal values
+                int x1 = x - 1;
+                int y2 = y - 1;
+                // check if valid coordinate
+                if (x1 > -1 && y2 > -1) {
+                    int val = matrix[x][y];
+                    int other = matrix[x1][y2];
+                    if (val != other) return false;
+                }
+            }
+        }
+        return true;
+    }
 }

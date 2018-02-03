@@ -187,4 +187,11 @@ Input:
         assertThat(Solutions.reverseWords("Let's take LeetCode contest"), equalTo("s'teL ekat edoCteeL tsetnoc"));
     }
 
+    @Test
+    public void isToeplitzMatrixTest() {
+        // [[1,2,3,4],[5,1,2,3],[9,5,1,2]]
+        int[][] input = new int[][]{new int[]{1, 2, 3, 5}, new int[]{5, 1, 2, 3}, new int[]{9, 5, 1, 2}};
+        assertTrue(Solutions.isToeplitzMatrix(input));
+    }
+
 }
