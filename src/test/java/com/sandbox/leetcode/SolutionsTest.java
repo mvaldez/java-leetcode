@@ -4,7 +4,9 @@ import com.sandbox.collections.TreeNode;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -192,6 +194,47 @@ Input:
         // [[1,2,3,4],[5,1,2,3],[9,5,1,2]]
         int[][] input = new int[][]{new int[]{1, 2, 3, 5}, new int[]{5, 1, 2, 3}, new int[]{9, 5, 1, 2}};
         assertTrue(Solutions.isToeplitzMatrix(input));
+    }
+
+    /**
+     * [
+    "1",
+    "2",
+    "Fizz",
+    "4",
+    "Buzz",
+    "Fizz",
+    "7",
+    "8",
+    "Fizz",
+    "Buzz",
+    "11",
+    "Fizz",
+    "13",
+    "14",
+    "FizzBuzz"
+]
+     */
+    @Test
+    public void fizzBuzzTest() {
+        List<String> expected = new ArrayList<>();
+        expected.add("1");
+        expected.add("2");
+        expected.add("Fizz");
+        expected.add("4");
+        expected.add("Buzz");
+        expected.add("Fizz");
+        expected.add("7");
+        expected.add("8");
+        expected.add("Fizz");
+        expected.add("Buzz");
+        expected.add("11");
+        expected.add("Fizz");
+        expected.add("13");
+        expected.add("14");
+        expected.add("FizzBuzz");
+
+        assertThat(Solutions.fizzBuzz(15), equalTo(expected));
     }
 
 }
