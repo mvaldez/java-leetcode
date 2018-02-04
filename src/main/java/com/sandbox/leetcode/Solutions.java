@@ -412,10 +412,42 @@ public class Solutions {
 
     public static int distributeCandies(int[] candies) {
         Set<Integer> s = new HashSet<>();
+
         for (int i = 0; i < candies.length; i++) {
             s.add(candies[i]);
         }
         int size = candies.length / 2;
         return Math.min(size, s.size());
+    }
+
+    public static int[][] matrixReshape(int[][] nums, int r, int c) {
+        // original matrix row and columns
+        int cc = nums.length;
+        int rr = nums[0].length;
+
+        // if the new matrix cannot fit the elements we are done
+        if (r * c != rr * cc) {
+            return nums;
+        }
+
+        // pull the element out of the original matrix
+        List<Integer> tmp = new ArrayList<>();
+        for (int x = 0; x < cc; x++) {
+            for (int y = 0; y < rr; y++) {
+                tmp.add(nums[x][y]);
+            }
+        }
+
+        // add values to new matrix
+        int[][] result = new int[r][c];
+        int index = 0;
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+               result[i][j] = tmp.get(index);
+               index++;
+            }
+        }
+
+        return result;
     }
 }
