@@ -237,4 +237,17 @@ Input:
         assertThat(Solutions.fizzBuzz(15), equalTo(expected));
     }
 
+    @Test
+    public void distCandiesTest() {
+        int[] c1 = new int[]{1, 1, 2, 2, 3, 3};
+        int[] c2 = new int[]{1, 1, 2, 3};
+        int[] c3 = new int[]{0,0,14,0,10,0,0,0};
+        int[] c4 = new int[]{1000,1000,2,1,2,5,3,1};
+
+        assertThat(Solutions.distributeCandies(c1), equalTo(3));
+        assertThat(Solutions.distributeCandies(c2), equalTo(2));
+        assertThat(Solutions.distributeCandies(c3), equalTo(3));
+        assertThat(Solutions.distributeCandies(c4), equalTo(4));
+    }
+
 }

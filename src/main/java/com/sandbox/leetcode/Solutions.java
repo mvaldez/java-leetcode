@@ -409,4 +409,13 @@ public class Solutions {
         }
         return results;
     }
+
+    public static int distributeCandies(int[] candies) {
+        Set<Integer> s = new HashSet<>();
+        for (int i = 0; i < candies.length; i++) {
+            s.add(candies[i]);
+        }
+        int size = candies.length / 2;
+        return Math.min(size, s.size());
+    }
 }
