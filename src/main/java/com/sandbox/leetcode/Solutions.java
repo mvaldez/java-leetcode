@@ -450,4 +450,108 @@ public class Solutions {
 
         return result;
     }
+
+   public static int islandPerimeter(int[][] grid) {
+        int perimeter = 0;
+        int r = grid.length - 1;
+        int c = grid[0].length - 1;
+        for (int x = 0; x < grid.length; x++) {
+            for (int y = 0; y < grid[0].length; y++) {
+                if (grid[x][y] == 1) {
+                    // check left
+                    if (y - 1 < 0) {
+                        perimeter++;
+                    } else if (grid[x][y-1] == 0) {
+                        perimeter++;
+                    } else {
+                        // do nothing
+                    }
+                    // check right
+                    if (y + 1 > c) {
+                        perimeter++;
+                    } else if (grid[x][y+1] == 0) {
+                        perimeter++;
+                    } else {
+                        // do nothing
+                    }
+                    // check up
+                    if (x - 1 < 0) {
+                        perimeter++;
+                    } else if (grid[x-1][y] == 0) {
+                        perimeter++;
+                    } else {
+                        // do nothing
+                    }
+                    // check down
+                    if (x + 1 > r) {
+                        perimeter++;
+                    } else if (grid[x+1][y] == 0) {
+                        perimeter++;
+                    } else {
+                        // do nothing
+                    }
+                }
+            }
+        }
+        return perimeter;
+   }
+
+   public static int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int[] results = new int[nums1.length];
+        // build a mapping of indexes
+       Map<Integer, Integer> m = new HashMap<>();
+       for (int i = 0; i < nums2.length; i++) {
+          m.put(nums2[i], i);
+       }
+
+       int max = nums2.length;
+       int r_index = 0;
+       for (int i = 0; i < nums1.length; i++) {
+           int index = m.get(nums1[i]);
+           if (index + 1 < max) {
+               boolean found = false;
+               for (int j = index + 1; j < nums2.length; j++) {
+                   if (nums2[j] > nums1[i]) {
+                       results[r_index] = nums2[j];
+                       found = true;
+                       r_index++;
+                       break;
+                   }
+               }
+               if (!found) {
+                   results[r_index] = -1;
+                   r_index++;
+               }
+           } else {
+               results[r_index] = -1;
+               r_index++;
+           }
+       }
+       return results;
+   }
+
+   public static int countPrimeSetBits(int L, int R) {
+       int primes = 0;
+       for (int i = L; i <= R; i++) {
+           String bin = Integer.toBinaryString(i);
+           int count = 0;
+           for (int j = 0; j < bin.length(); j++) {
+               if (bin.charAt(j) == '1') {
+                   count++;
+               }
+           }
+           if (isPrime(count)) primes++;
+       }
+       return primes;
+   }
+
+   public static boolean isPrime(int n) {
+       if (n < 2) return false;
+       if (n == 2) return true;
+       if (n % 2 == 0) return false;
+       for (int i = 3; i * i <= n; i += 2) {
+           if (n % i == 0) return false;
+       }
+       return true;
+   }
 }
