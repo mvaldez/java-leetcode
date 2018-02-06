@@ -284,4 +284,13 @@ Input:
 
         assertThat(Solutions.averageOfLevels(root), equalTo(expected));
     }
+
+    @Test
+    public void hasAlternatingBitsTest() {
+        int[] vals = new int[]{5, 7, 11, 10};
+        boolean[] exp = new boolean[]{true, false, false, true};
+        for (int i = 0; i < vals.length; i++) {
+            assertThat(Solutions.hasAlternatingBits(vals[i]), equalTo(exp[i]));
+        }
+    }
 }

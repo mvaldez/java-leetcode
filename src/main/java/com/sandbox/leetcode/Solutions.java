@@ -583,4 +583,18 @@ public class Solutions {
         return results;
     }
 
+    public static boolean hasAlternatingBits(int n) {
+        String s = Integer.toBinaryString(n);
+        if (s.length() < 2) return true;
+        char prev = s.charAt(0);
+        for (int i = 1; i < s.length(); i++) {
+            char curr = s.charAt(i);
+            if (prev == curr) {
+                return false;
+            } else {
+                prev = curr;
+            }
+        }
+        return true;
+    }
 }
