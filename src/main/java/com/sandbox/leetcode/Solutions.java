@@ -554,4 +554,33 @@ public class Solutions {
        }
        return true;
    }
+
+    public static List<Double> averageOfLevels(TreeNode root) {
+        // breadth first search
+        List<Double> results = new ArrayList<>();
+        TreeNode r = root;
+        Stack<TreeNode> s = new Stack<>();
+        s.push(r);
+        while (!s.empty()) {
+            List<TreeNode> l = new ArrayList<>();
+            // pull the current nodes out of the stack
+            while (!s.empty()) {
+                l.add(s.pop());
+            }
+            // calculate the average and push them onto the que
+            double sum = 0;
+            for (TreeNode t : l) {
+                sum += t.val;
+                if (t.left != null) {
+                    s.push(t.left);
+                }
+                if (t.right != null) {
+                    s.push(t.right);
+                }
+            }
+            results.add(sum / l.size());
+        }
+        return results;
+    }
+
 }

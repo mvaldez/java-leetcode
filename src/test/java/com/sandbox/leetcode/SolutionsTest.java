@@ -268,4 +268,20 @@ Input:
         assertThat(Solutions.countPrimeSetBits(6, 10), equalTo(4));
         assertTrue(Solutions.isPrime(3));
     }
+
+    @Test
+    public void avgOfLevelsTest() {
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+
+        List<Double> expected = new ArrayList<>();
+        expected.add(3.0);
+        expected.add(14.5);
+        expected.add(11.0);
+
+        assertThat(Solutions.averageOfLevels(root), equalTo(expected));
+    }
 }
