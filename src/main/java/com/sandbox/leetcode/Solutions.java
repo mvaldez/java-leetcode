@@ -597,4 +597,30 @@ public class Solutions {
         }
         return true;
     }
+
+    public static int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+
+        TreeNode n = root;
+        Stack<TreeNode> s = new Stack<>();
+        s.push(n);
+        int depth = 0;
+        while (!s.empty()) {
+            depth++;
+            List<TreeNode> l = new ArrayList<>();
+            while (!s.empty()) {
+                l.add(s.pop());
+            }
+
+            for (TreeNode t : l) {
+                if (t.left != null) {
+                    s.push(t.left);
+                }
+                if (t.right != null) {
+                    s.push(t.right);
+                }
+            }
+        }
+        return depth;
+    }
 }

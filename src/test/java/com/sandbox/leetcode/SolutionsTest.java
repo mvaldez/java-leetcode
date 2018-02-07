@@ -293,4 +293,15 @@ Input:
             assertThat(Solutions.hasAlternatingBits(vals[i]), equalTo(exp[i]));
         }
     }
+
+    @Test
+    public void maxDepthTest() {
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+
+        assertThat(Solutions.maxDepth(root), equalTo(3));
+    }
 }
