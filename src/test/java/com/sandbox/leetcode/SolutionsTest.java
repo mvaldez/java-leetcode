@@ -1,5 +1,6 @@
 package com.sandbox.leetcode;
 
+import com.sandbox.collections.Employee;
 import com.sandbox.collections.TreeNode;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -304,4 +305,30 @@ Input:
 
         assertThat(Solutions.maxDepth(root), equalTo(3));
     }
+
+    @Test
+    public void getImportanceTest() {
+        Employee e1 = new Employee();
+        e1.id = 1;
+        e1.importance = 5;
+        e1.subordinates = new ArrayList<Integer>(){{add(2); add(3);}};
+
+        Employee e2 = new Employee();
+        e2.id = 2;
+        e2.importance = 3;
+        e2.subordinates = null;
+
+        Employee e3 = new Employee();
+        e3.id = 3;
+        e3.importance = 3;
+        e3.subordinates = null;
+
+        List<Employee> employees = new ArrayList<>();
+        employees.add(e1);
+        employees.add(e2);
+        employees.add(e3);
+
+        assertThat(Solutions.getImportance(employees, 1), equalTo(11));
+    }
+
 }

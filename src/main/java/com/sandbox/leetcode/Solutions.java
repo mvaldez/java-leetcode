@@ -1,5 +1,6 @@
 package com.sandbox.leetcode;
 
+import com.sandbox.collections.Employee;
 import com.sandbox.collections.TreeNode;
 
 import java.util.*;
@@ -622,5 +623,22 @@ public class Solutions {
             }
         }
         return depth;
+    }
+
+    public static int getImportance(List<Employee> employees, int id) {
+        Map<Integer, Employee> m = new HashMap<>();
+        for (Employee e : employees) {
+            m.put(e.id, e);
+        }
+        return calc(m.get(id).subordinates, m, m.get(id).importance);
+    }
+
+    public static int calc(List<Integer> l, Map<Integer, Employee> m, int val) {
+        if (l == null || l.isEmpty()) return val;
+
+        for (int i : l) {
+             val += calc(m.get(i).subordinates, m, m.get(i).importance);
+        }
+        return val;
     }
 }
