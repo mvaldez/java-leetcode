@@ -331,4 +331,10 @@ Input:
         assertThat(Solutions.getImportance(employees, 1), equalTo(11));
     }
 
+    @Test
+    public void maxAreaOfIslandTest() {
+        int[][] grid = {new int[]{0, 1, 1}, new int[]{1, 1, 0, 0}};
+
+        assertThat(Solutions.maxAreaOfIsland(grid), equalTo(4));
+    }
 }

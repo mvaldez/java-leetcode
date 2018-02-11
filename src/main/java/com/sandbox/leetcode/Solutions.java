@@ -641,4 +641,36 @@ public class Solutions {
         }
         return val;
     }
+
+    public static int maxAreaOfIsland(int[][] grid) {
+        int maxArea = 0;
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[0].length; col++) {
+                if (grid[row][col] == 1) {
+                    int val = dfs(row, col, grid);
+                    maxArea = Math.max(maxArea, val);
+                }
+            }
+        }
+        return maxArea;
+    }
+
+    public static int dfs(int r, int c, int[][] grid) {
+        int minRow = 0;
+        int minCol = 0;
+        int maxRow = grid.length -1;
+        int maxCol = grid[0].length -1;
+
+        if (r > maxRow) return 0;
+        if (minRow > r) return 0;
+        if (c > maxCol) return 0;
+        if (minCol > c) return 0;
+
+        if (grid[r][c] == 1) {
+            grid[r][c] = 0; // visited // alternatively I should copy the grid or use a Set<Coordinates> visited
+            return 1 + dfs(r -1, c, grid) + dfs(r + 1, c, grid) + dfs(r, c -1, grid) + dfs(r, c + 1, grid);
+        } else {
+            return 0;
+        }
+    }
 }
