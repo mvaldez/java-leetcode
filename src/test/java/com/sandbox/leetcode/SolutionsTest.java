@@ -337,4 +337,18 @@ Input:
 
         assertThat(Solutions.maxAreaOfIsland(grid), equalTo(4));
     }
+
+    @Test
+    public void addDigitsTest() {
+        assertThat(Solutions.addDigits(38), equalTo(2));
+        assertThat(Solutions.addDigits(112), equalTo(4));
+        assertThat(Solutions.addDigits(199), equalTo(1));
+    }
+
+    @Test
+    public void findDigitalRootsTest() {
+        assertThat(Solutions.findDigitalRoot(38), equalTo(2));
+        assertThat(Solutions.findDigitalRoot(112), equalTo(4));
+        assertThat(Solutions.findDigitalRoot(199), equalTo(1));
+    }
 }

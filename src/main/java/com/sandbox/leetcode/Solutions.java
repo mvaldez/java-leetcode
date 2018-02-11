@@ -673,4 +673,31 @@ public class Solutions {
             return 0;
         }
     }
+
+    /**
+     * Given a non-negative integer num, repeatedly add all its
+     * digits until the result has only one digit.
+     *
+     * 38 = 3 + 8 = 11 = 1 + 1 = 2
+     *
+     * @param num non-negative integer
+     * @return digital root
+     */
+    public static int addDigits(int num) {
+        // integer division removes the last number
+        // mod 10 gives you the last number
+        int sum = 0;
+        for (int i = num; i != 0; i = i / 10) {
+            sum += i % 10;
+        }
+        if (sum > 9) {
+            sum = addDigits(sum);
+        }
+        return sum;
+    }
+
+    public static int findDigitalRoot(int num) {
+        // digital root formula
+        return num - 9 * (int) Math.floor((num - 1)/9);
+    }
 }
