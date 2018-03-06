@@ -700,4 +700,29 @@ public class Solutions {
         // digital root formula
         return num - 9 * (int) Math.floor((num - 1)/9);
     }
+
+    /**
+     * Given an array nums, write a function to move all 0's to the end of
+     * it while maintaining the relative order of the non-zero elements.
+     * For example, given nums = [0, 1, 0, 3, 12], after calling your
+     * function, nums should be [1, 3, 12, 0, 0].
+     *
+     * @param nums initial array
+     * @return modified array for ease of test
+     */
+    public static int[] moveZeros(int[] nums) {
+        int end = nums.length - 1;
+        for (int i = 0; i < nums.length; i++) {
+            // shift till no more zeros
+            while (nums[i] == 0 && i < end) {
+                // shift left
+                for (int j = i; j < nums.length - 1; j++) {
+                    nums[j] = nums[j + 1];
+                }
+                nums[nums.length - 1] = 0; // add zero to the end
+                end--; // set end
+            }
+        }
+        return nums;
+    }
 }

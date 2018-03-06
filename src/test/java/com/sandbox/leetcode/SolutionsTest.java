@@ -351,4 +351,10 @@ Input:
         assertThat(Solutions.findDigitalRoot(112), equalTo(4));
         assertThat(Solutions.findDigitalRoot(199), equalTo(1));
     }
+
+    @Test
+    public void moveZerosTest() {
+        int[] nums = new int[]{0, 1, 0, 3, 12};
+        assertThat(Solutions.moveZeros(nums), equalTo(new int[]{1, 3, 12, 0, 0}));
+    }
 }
