@@ -725,4 +725,84 @@ public class Solutions {
         }
         return nums;
     }
+
+    /**
+     * Given a string S, we can transform every letter individually to be lowercase
+     * or uppercase to create another string.  Return a list of all possible strings
+     * we could create.
+     *
+     * @param S - input string
+     * @return List of permutations
+     */
+    public static List<String> letterCasePermutation(String S) {
+        Set<String> s = new HashSet<>();
+        s.add(S);
+        char[] chars = S.toCharArray();
+        for (int i = 0; i < chars.length ; i++) {
+            if (!Character.isDigit(chars[i])) {
+                chars[i] = Character.toUpperCase(chars[i]);
+                s.add(Arrays.toString(chars));
+            }
+        }
+        return new ArrayList<>(s);
+    }
+
+    /**
+     * X is a good number if after rotating each digit individually by 180 degrees,
+     * we get a valid number that is different from X.  Each digit must be rotated -
+     * we cannot choose to leave it alone.
+     *
+     * @param N - number in the range of 1 - 10000 inclusive
+     * @return number of valid numbers in range
+     */
+    public static int rotateDigits(int N) {
+        Map<Integer, String> rotatedDigits = new HashMap<>();
+        rotatedDigits.put(1, "1");
+        rotatedDigits.put(2, "5");
+        rotatedDigits.put(3, "x");
+        rotatedDigits.put(4, "x");
+        rotatedDigits.put(5, "2");
+        rotatedDigits.put(6, "9");
+        rotatedDigits.put(7, "x");
+        rotatedDigits.put(8, "8");
+        rotatedDigits.put(9, "6");
+        rotatedDigits.put(0, "0");
+
+        // integer division by 10 will strip the last digit
+        // mod by 10 will provide the last digit
+        int validNums = 0;
+        for (int i = 1; i < N+1; i++) {
+            if (i < 10 && !rotatedDigits.get(i).equals("x") && Integer.valueOf(rotatedDigits.get(i)) != i) {
+                validNums++;
+            } else {
+                List<Integer> l = getDigits(i);
+                StringBuilder sb = new StringBuilder();
+                boolean isValid = true;
+                for (int n : l) {
+                    String digit = rotatedDigits.get(n);
+                    if (digit.equals("x")) {
+                        isValid = false;
+                        break;
+                    }
+                    sb.append(digit);
+                }
+                if (isValid && Integer.valueOf(sb.toString()) != i) {
+                    validNums++;
+                }
+            }
+        }
+        return validNums;
+    }
+
+    protected static List<Integer> getDigits(int val) {
+        List<Integer> result = new ArrayList<>();
+        int tmp = val;
+        while (tmp > 0) {
+            int digit = tmp % 10;
+            result.add(digit);
+            tmp = tmp / 10;
+        }
+        Collections.reverse(result); // // TODO: make this a stack?
+        return result;
+    }
 }

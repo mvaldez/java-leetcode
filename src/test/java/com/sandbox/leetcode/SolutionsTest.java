@@ -357,4 +357,10 @@ Input:
         int[] nums = new int[]{0, 1, 0, 3, 12};
         assertThat(Solutions.moveZeros(nums), equalTo(new int[]{1, 3, 12, 0, 0}));
     }
+
+    @Test
+    public void rotateDigitsTest() {
+        assertThat(Solutions.rotateDigits(11), equalTo(4));
+        assertThat(Solutions.rotateDigits(20), equalTo(9));
+    }
 }
