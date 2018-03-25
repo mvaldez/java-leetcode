@@ -735,16 +735,23 @@ public class Solutions {
      * @return List of permutations
      */
     public static List<String> letterCasePermutation(String S) {
-        Set<String> s = new HashSet<>();
-        s.add(S);
-        char[] chars = S.toCharArray();
-        for (int i = 0; i < chars.length ; i++) {
-            if (!Character.isDigit(chars[i])) {
-                chars[i] = Character.toUpperCase(chars[i]);
-                s.add(Arrays.toString(chars));
+        Queue<String> queue = new LinkedList<>();
+        queue.offer(S);
+        for (int i = 0; i < S.length(); i++) {
+            if (Character.isDigit(S.charAt(i))) continue;
+            int size = queue.size();
+            for (int j = 0; j < size; j++) {
+                String s = queue.poll();
+
+                char[] tmp = s.toCharArray();
+                tmp[i] = Character.toUpperCase(tmp[i]);
+                queue.offer(String.valueOf(tmp));
+
+                tmp[i] = Character.toLowerCase(tmp[i]);
+                queue.offer(String.valueOf(tmp));
             }
         }
-        return new ArrayList<>(s);
+        return new LinkedList<>(queue);
     }
 
     /**

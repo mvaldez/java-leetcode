@@ -5,13 +5,11 @@ import com.sandbox.collections.TreeNode;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.junit.Assert.*;
 
 /**
@@ -362,5 +360,23 @@ Input:
     public void rotateDigitsTest() {
         assertThat(Solutions.rotateDigits(11), equalTo(4));
         assertThat(Solutions.rotateDigits(20), equalTo(9));
+    }
+
+    @Test
+    public void letterCasePermutationTest() {
+        assertThat(Solutions.letterCasePermutation("a1b2"), hasItems("a1b2", "A1b2", "a1B2", "A1B2"));
+    }
+
+    @Test
+    public void queueTest() {
+        Queue<String> q = new LinkedList<>();
+        q.offer("M");
+        q.offer("a");
+        q.offer("r");
+        q.offer("k");
+
+        while (!q.isEmpty()) {
+            System.out.println(q.poll());
+        }
     }
 }
