@@ -866,4 +866,30 @@ public class Solutions {
         }
     }
 
+    public static int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        int match = image[sr][sc];
+        dfs(image, sr, sc, newColor, match);
+        return image;
+    }
+
+    protected static void dfs(int[][] image, int sr, int sc, int newColor, int match) {
+        if (sr > image.length - 1) return;
+        if (sr < 0) return;
+        if (sc < 0) return;
+        if (sc > image[0].length - 1) return;
+        if (image[sr][sc] == newColor) return; // visited!
+        if (image[sr][sc] != match) return;
+
+        // mod image
+        image[sr][sc] = newColor;
+
+        // up
+        dfs(image, sr - 1, sc, newColor, match);
+        // down
+        dfs(image, sr + 1, sc, newColor, match);
+        // left
+        dfs(image, sr, sc - 1, newColor, match);
+        // right
+        dfs(image, sr, sc + 1, newColor, match);
+    }
 }
