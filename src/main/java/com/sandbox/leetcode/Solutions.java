@@ -812,4 +812,58 @@ public class Solutions {
         Collections.reverse(result); // // TODO: make this a stack?
         return result;
     }
+
+    /*
+        Array index represents plane id and the values represent fuel levels.
+        The problem is to land planes in order but to account for emergencies.
+        An emergency is a plane with 0 fuel.  That plane needs to be landed
+        immediately else you simply land the next plane in order from left to
+        right. Fuel decrements by 1 for each plane for each time interval
+
+        t0: [1 5 0 3] result: [2 - - -]
+        t1: [0 4 - 2] result: [2 0 - -]
+        t2: [- 3 - 1] result: [2 0 1 -]
+        t3: [- - - 0] result: [2 0 1 3]
+
+     */
+    public static int[] landPlanes(int[] planes) {
+        int[] result = new int[planes.length];
+
+        for (int t = 0; t < planes.length; t++) {
+            // land planes
+            boolean landed = false;
+
+            // emergency landing
+            for (int j = 0; j < planes.length; j++) {
+                if (planes[j] == 0) {
+                    result[t] = j;
+                    planes[j] = -1;
+                    landed = true;
+                }
+            }
+
+            if (landed) {
+                decrement(planes);
+                continue;
+            }
+
+            // normal landing
+            for (int j = 0; j < planes.length; j++) {
+                if (planes[j] >= 0) {
+                    result[t] = j;
+                    planes[j] = -1;
+                    decrement(planes);
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    protected  static void decrement(int[] planes) {
+        for (int i = 0; i < planes.length; i++) {
+           planes[i] = planes[i] - 1;
+        }
+    }
+
 }

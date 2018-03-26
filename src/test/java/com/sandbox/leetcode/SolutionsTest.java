@@ -379,4 +379,10 @@ Input:
             System.out.println(q.poll());
         }
     }
+
+    @Test
+    public void landPlanesTest() {
+       int[] planes = new int[]{1, 5, 0, 3};
+       assertThat(Solutions.landPlanes(planes), equalTo(new int[]{2, 0, 1, 3}));
+    }
 }
