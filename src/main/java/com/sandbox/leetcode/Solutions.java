@@ -892,4 +892,88 @@ public class Solutions {
         // right
         dfs(image, sr, sc + 1, newColor, match);
     }
+
+    public static int minDepth(TreeNode root) {
+        if (root == null) return 0;
+        if (root.left == null && root.right == null) return 1;
+
+        if (root.left == null) {
+            return minDepth(root.right) + 1;
+        }
+
+        if (root.right == null) {
+            return minDepth(root.left) + 1;
+        }
+
+        return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
+    }
+
+    /**
+     * This version only takes into account the min diff between parent and leaves.
+     *
+     * @param root {@link TreeNode}
+     * @return min diff between parent and immediate nodes
+     */
+    public static int minDiffInBSTLeavesOnly(TreeNode root) {
+        if (root == null) return 0;
+
+        int min = 0;
+        boolean first = true;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            int lval = 0;
+            int rval = 0;
+            int curr = node.val;
+
+            if (node.left == null && node.right == null) continue;
+
+            if (node.left != null) {
+                lval = node.left.val;
+                queue.offer(node.left);
+            }
+            if (node.right != null) {
+                rval = node.right.val;
+                queue.offer(node.right);
+            }
+
+            int tmp = Math.min(Math.abs(curr - lval), Math.abs(rval - curr));
+            if (first) {
+                min = tmp;
+                first = false;
+            } else {
+                min = Math.min(min, tmp);
+            }
+        }
+        return min;
+    }
+
+    public static List<List<Integer>> getNodesPerLevel(TreeNode root) {
+        List<List<Integer>> results = new ArrayList<>();
+
+        if (root == null) return results;
+
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+
+        while (!q.isEmpty()) {
+            List<Integer> l = new ArrayList<>();
+            int size = q.size();
+
+            for (int i = 0; i < size; i++) {
+                TreeNode n = q.poll();
+                l.add(n.val);
+                if (n.left != null) {
+                    q.offer(n.left);
+                }
+                if (n.right != null) {
+                    q.offer(n.right);
+                }
+            }
+            results.add(l);
+        }
+        return results;
+    }
 }

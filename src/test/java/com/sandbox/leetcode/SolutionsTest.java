@@ -5,11 +5,12 @@ import com.sandbox.collections.TreeNode;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.*;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 /**
@@ -395,5 +396,66 @@ Input:
         int newColor = 2;
 
         assertThat(Solutions.floodFill(image, sr, sc, newColor), equalTo(output));
+    }
+
+    @Test
+    public void minDepthTest() {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.left.left = new TreeNode(3);
+        root.right = new TreeNode(4);
+
+        assertThat(Solutions.minDepth(root), equalTo(2));
+    }
+
+    @Test
+    public void minDiffInBSTTest() {
+        TreeNode root = new TreeNode(4);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(6);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(3);
+
+        assertThat(Solutions.minDiffInBSTLeavesOnly(root), equalTo(1));
+    }
+
+    // ------------------ special String tests ---------------------
+    @Test
+    public void StringyTests() {
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        String foo = "test1";
+        assertThat(stringTest1(foo), equalTo("test2"));
+        assertThat(foo, equalTo("test1"));
+        assertThat("finally executed", equalTo(outContent.toString()));
+        System.setOut(System.out);
+    }
+
+    private String stringTest1(String s) {
+        try {
+            s = "test2";
+            return s;
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            System.out.print("finally executed");
+        }
+    }
+    // ----------------- end ----------------------------------------
+
+    @Test
+    public void getNodesPerLevelTest() {
+        TreeNode root = new TreeNode(4);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(6);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(3);
+
+        List<List<Integer>> expected = new ArrayList<>();
+        expected.add(new ArrayList<Integer>() {{ add(4);}});
+        expected.add(new ArrayList<Integer>() {{ add(2); add(6); }});
+        expected.add(new ArrayList<Integer>() {{ add(1); add(3); }});
+
+        assertThat(Solutions.getNodesPerLevel(root), is(expected));
     }
 }
