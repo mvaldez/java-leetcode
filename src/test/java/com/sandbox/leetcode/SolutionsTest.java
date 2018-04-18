@@ -458,4 +458,13 @@ Input:
 
         assertThat(Solutions.getNodesPerLevel(root), is(expected));
     }
+
+    @Test
+    public void subdomainVisitsTest() {
+        String[] domains = new String[] {"900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", "5 wiki.org"};
+        List<String> expected = Arrays.asList("901 mail.com","50 yahoo.com","900 google.mail.com","5 wiki.org","5 org","1 intel.mail.com","951 com");
+
+        assertThat(new HashSet<>(Solutions.subdomainVisits(domains)), equalTo(new HashSet<>(expected)));
+
+    }
 }

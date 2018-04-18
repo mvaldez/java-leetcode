@@ -976,4 +976,47 @@ public class Solutions {
         }
         return results;
     }
+
+    public static List<String> subdomainVisits(String[] cpdomains) {
+        Map<String, Integer> m = new HashMap<>();
+
+        for (int i = 0; i < cpdomains.length; i++) {
+
+            // parse cpdomains
+            String d = cpdomains[i];
+            String[] tuple = d.split(" ");
+
+            // parse domain
+            int count = Integer.parseInt(tuple[0]);
+            String domain = tuple[1];
+            storeCount(m, domain, count);
+
+            // parse subdomains
+            String[] subs = domain.split("\\.");
+            if (subs.length == 3) {
+                String d1 = subs[1] + "." + subs[2];
+                String d2 = subs[2];
+                storeCount(m, d1, count);
+                storeCount(m, d2, count);
+            } else {
+                String d2 = subs[1];
+                storeCount(m, d2, count);
+            }
+        }
+
+        List<String> r = new ArrayList<>();
+
+        for (Map.Entry<String, Integer> e : m.entrySet()) {
+            r.add(e.getValue() + " " + e.getKey());
+        }
+        return r;
+    }
+
+    public static void storeCount(Map<String, Integer> m, String key, int count) {
+        if (m.containsKey(key)) {
+            m.put(key, m.get(key) + count);
+        } else {
+            m.put(key, count);
+        }
+    }
 }
